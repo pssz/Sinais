@@ -1,22 +1,20 @@
-import os
-import telegram
-from telegram.ext import Updater, CommandHandler
+from telegram import Update, Bot, InputFile
+from telegram.ext import Updater, CommandHandler, CallbackContext
 
-TOKEN = os.environ['BOT_TOKEN']
-CHAT_ID = os.environ['CHAT_ID']
+# Token do seu bot do Telegram
+TOKEN = "6670101561:AAH5n3rXZmxp6AKXoYlhNv-yA4iOE5QoXlI"
 
-bot = telegram.Bot(token=TOKEN)
+def start(update: Update, context: CallbackContext):
+    update.message.reply_text("Olá! Bot funcionando no Render ✅")
 
-def start(update, context):
-    context.bot.send_message(chat_id=CHAT_ID, text="✅ Bot iniciado com sucesso!")
+def main():
+    updater = Updater(TOKEN, use_context=True)
+    dp = updater.dispatcher
 
-def alerta(update, context):
-    mensagem = ' '.join(context.args)
-    context.bot.send_message(chat_id=CHAT_ID, text=f"📢 Alerta de sinal: {mensagem}")
+    dp.add_handler(CommandHandler("start", start))
 
-updater = Updater(token=TOKEN, use_context=True)
-dispatcher = updater.dispatcher
-dispatcher.add_handler(CommandHandler('start', start))
-dispatcher.add_handler(CommandHandler('alerta', alerta))
+    updater.start_polling()
+    updater.idle()
 
-updater.start_polling()
+if __name__ == '__main__':
+    main()
