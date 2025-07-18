@@ -1,16 +1,16 @@
-from telegram import Update, Bot, InputFile
-from telegram.ext import Updater, CommandHandler, CallbackContext
 
-# Token do seu bot do Telegram
-TOKEN = "6670101561:AAH5n3rXZmxp6AKXoYlhNv-yA4iOE5QoXlI"
 
-def start(update: Update, context: CallbackContext):
-    update.message.reply_text("Olá! Bot funcionando no Render ✅")
+from telegram.ext import Updater, CommandHandler
+
+def start(update, context):
+    update.message.reply_text("✅ Bot funcionando com sucesso!")
 
 def main():
-    updater = Updater(TOKEN, use_context=True)
+    # Substitua este token pelo seu, se for diferente
+    updater = Updater("6670101561:AAH5n3rXZmxp6AKXoYlhNv-yA4iOE5QoXlI", use_context=True)
     dp = updater.dispatcher
 
+    # Comando /start
     dp.add_handler(CommandHandler("start", start))
 
     updater.start_polling()
