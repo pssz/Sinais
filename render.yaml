@@ -1,6 +1,0 @@
-services:
-  - type: web
-    name: sinal-bot
-    env: python
-    buildCommand: ""
-    startCommand: python main.py
